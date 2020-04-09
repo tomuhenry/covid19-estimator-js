@@ -1,17 +1,17 @@
+const covidImpact = (reportedCases, people) => {
+  let currentlyInfected = reportedCases * people;
+  return {
+    currentlyInfected: currentlyInfected,
+    infectionsByRequestedTime: currentlyInfected * 1024
+  };
+};
+
 const covid19ImpactEstimator = (data) => {
-  var reportedCases = data.reportedCases;
+  let reportedCases = data.reportedCases;
   return {
     data: data,
     impact: covidImpact(reportedCases, 10),
     severeImpact: covidImpact(reportedCases, 50)
-  };
-};
-
-const covidImpact = (reportedCases, people) => {
-  var currentlyInfected = reportedCases * people;
-  return {
-    currentlyInfected: currentlyInfected,
-    infectionsByRequestedTime: currentlyInfected * 1024
   };
 };
 
