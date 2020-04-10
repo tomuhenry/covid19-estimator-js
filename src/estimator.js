@@ -1,15 +1,15 @@
 const covidImpact = (reportedCases, people, beds) => {
-  let currentlyInfected = reportedCases * people;
-  let infectionsByRequestedTime = currentlyInfected * 1024;
-  let severeCasesByRequestedTime = Math.round(infectionsByRequestedTime * 0.15);
-  let hospitalBedsByRequestedTime = Math.floor(
-    severeCasesByRequestedTime * 0.35
+  const currentlyInfected = reportedCases * people;
+  const infectionsByRequestedTime = currentlyInfected * 1024;
+  const severeCasesByRequestedTime = Math.round(
+    infectionsByRequestedTime * 0.15
   );
-  if (hospitalBedsByRequestedTime >= 0) {
-    return hospitalBedsByRequestedTime;
-  } else {
-    hospitalBedsByRequestedTime = -severeCasesByRequestedTime;
-  }
+  const bedCapacity = Math.round(beds * 0.95);
+  const availableBedsSevere = Math.round(bedCapacity * 0.35);
+
+  const hospitalBedsByRequestedTime =
+    availableBedsSevere - severeCasesByRequestedTime;
+
   return {
     currentlyInfected,
     infectionsByRequestedTime,
@@ -19,12 +19,12 @@ const covidImpact = (reportedCases, people, beds) => {
 };
 
 const covid19ImpactEstimator = (data) => {
-  let reportedCases = data.reportedCases;
-  let beds = data.totalHospitalBeds;
+  const reportedCases = data.reportedCases;
+  const beds = data.totalHospitalBeds;
   return {
     data: data,
-    impact: covidImpact(reportedCases, 10),
-    severeImpact: covidImpact(reportedCases, 50)
+    impact: covidImpact(reportedCases, 10, beds),
+    severeImpact: covidImpact(reportedCases, 50, beds)
   };
 };
 
