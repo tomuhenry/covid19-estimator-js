@@ -1,5 +1,4 @@
 /* eslint-disable linebreak-style */
-
 const covidImpact = (data, people) => {
   const {
     reportedCases,
