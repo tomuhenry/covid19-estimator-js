@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Covid-19 Estimator UI site" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="max-age=2592000, public" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./public/assets/css/bootstrap.min.css" />
+    <title>Covid19 Estimator</title>
+  </head>
+
+  <body class="bg-info">
+    <div>
+      <nav class="navbar navbar-dark bg-secondary">
+        <div class="navbar-brand">
+          <img
+            src="./public/assets/img/covid-19.png"
+            class="d-inline-block align-top"
+            alt="covid-19 Corona"
+          />
+        </div>
+        <p class="text-dark">Covid-19 Estimator</p>
+      </nav>
+    </div>
+
+    <div class="container mt-4 font-weight-bold">
+      <div class="p-3 mb-2 bg-light text-dark rounded">
+        <h1 class="text-center text-capitalize text-info">
+          Covid-19 Estimator
+        </h1>
+        <hr class="hr-danger" />
+        <form onsubmit="handleFormSubmit" id="form-data">
+          <div class="form-group">
+            <label for="population">Population Size</label>
+            <input
+              type="number"
+              data-population
+              class="form-control"
+              id="population"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="reportedCases">Reported Cases</label>
+            <input
+              type="number"
+              data-reported-cases
+              class="form-control"
+              id="reportedCases"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="totalHospitalBeds">Total Hospital Beds</label>
+            <input
+              type="number"
+              data-total-hospital-beds
+              class="form-control"
+              id="totalHospitalBeds"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="timeToElapse">Time to Elapse</label>
+            <input
+              type="number"
+              data-time-to-elapse
+              class="form-control"
+              id="timeToElapse"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="periodType">Example select</label>
+            <select data-period-type class="form-control" id="periodType">
+              <option value="days">Days</option>
+              <option value="weeks">Weeks</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <button
+              type="submit"
+              data-go-estimate
+              class="btn btn-lg btn-secondary m-3"
+            >
+              Estimate
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      const formToObject = () => {
+        const dataInput = {};
+        dataInput.population = parseInt(
+          document.getElementById('population').value
+        );
+        dataInput.timeToElapse = parseInt(
+          document.getElementById('timeToElapse').value
+        );
+        dataInput.reportedCases = parseInt(
+          document.getElementById('reportedCases').value
+        );
+        dataInput.totalHospitalBeds = parseInt(
+          document.getElementById('totalHospitalBeds').value
+        );
+        dataInput.periodType = document.getElementById('periodType').value;
+        return dataInput;
+      };
+      const handleFormSubmit = (event) => {
+        event.preventDefault();
+        const data = formToObject();
+      };
+      const form = document.getElementById('form-data');
+      form.addEventListener('submit', handleFormSubmit);
+    </script>
+  </body>
+</html>
