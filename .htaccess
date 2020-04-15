@@ -4,8 +4,8 @@
         Header set Cache-Control "max-age=604800, public"
     </FilesMatch>
 
-    # DAY
+    # WEEK
     <FilesMatch "\.(js|css|swf)$">
-        Header set Cache-Control "max-age=86400"
+        Header set Cache-Control "max-age=604800"
     </FilesMatch>
 </IfModule>
